@@ -1,13 +1,9 @@
-import React, { useState } from 'react';
-
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-
-import SideBar from './components/Sidebar';
-import {Routes ,Route} from 'react-router-dom';
-
-
-
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Main from "./components/Main";
+import SideBar from "./components/Sidebar";
 
 const App = () => {
   const [showLogin, setShowLogin] = useState(true);
@@ -21,20 +17,24 @@ const App = () => {
   };
 
   return (
-    <>
     <Routes>
-        <Route path="/sidebar" element={<SideBar />} />
-     
-      </Routes>
-      {showLogin ? (
-        <Login switchToSignup={switchToSignup} />
-      ) : (
-        <Signup switchToLogin={switchToLogin} />
-      )}
-      
-     
-      
-    </>
+      <Route
+        path="/"
+        element={
+          showLogin ? (
+            <Login switchToSignup={switchToSignup} />
+          ) : (
+            <Signup switchToLogin={switchToLogin} />
+          )
+        }
+      />
+      <Route
+        path="/signup"
+        element={<Signup switchToLogin={switchToLogin} />}
+      />
+      <Route path="/sidebar" element={<SideBar />} />
+      <Route path="/main" element={<Main />} />
+    </Routes>
   );
 };
 
